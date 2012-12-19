@@ -1,14 +1,13 @@
- function CountDown(secondstotheEnd) {
+ function CountDown() {
         var startTime = Date.now();
-        var endTime = new Date().setSeconds(startTime + secondstotheEnd) 
-        var totalTimeIntervalSize = secondstotheEnd * 1000;
+        var totalTimeIntervalSize = 1000;
         var circle = document.getElementById("arc");
         var spanMinutes = $('#tsMinutes');
         var spanSeconds = $('#tsSeconds');
         var gIndicator = $('#Indicator');
-        
+        var Running = false;
         var radius = 50;  
-        var LastPathInfo = circle.getAttribute("d");
+        var LastPathInfo = "M100,50 ";
         this.UpdateCircle = function() {
             var angle = -90;
             var currentTimeDiff = Date.now() - startTime;
@@ -35,9 +34,8 @@
             gIndicator.attr('transform', 'translate('+x+","+y +") rotate("+(angle+90) +")");
             
             
-            if(angle < 270)
-                setTimeout(this.UpdateCircle,50)
-            
+            if(angle < 270 && Running === true)
+                setTimeout(this.UpdateCircle,30);
         } 
         
         function GetDisplayTimePart(timePart)
@@ -45,5 +43,20 @@
             var strTimePart = ''+timePart;            
             return (strTimePart.length > 1?'':'0')+strTimePart;
         }
-        this.UpdateCircle();
+        
+        this.Start = function(minutes, seconds)
+        {
+            startTime = Date.now();
+            totalTimeIntervalSize = (minutes*60+seconds) * 1000;
+            $("#runningInfo").show();
+            $("#setUPInfo").hide();            
+            Running = true;            
+            this.UpdateCircle();
+        }
+        
+        this.Stop = function()
+        {
+            Running = false;
+        }
+        
     }

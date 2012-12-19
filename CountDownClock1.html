@@ -5,24 +5,51 @@
      <style>
         svg text{
             font-family:Verdana;
-            font-size:20;
-            fill:pink;
+            font-size:30;
+            fill:white;
             text-anchor: middle;
-            dominant-baseline: central;
+            dominant-baseline: central;            
+        }
+        #runningInfo
+        {
+            display:none;
+        }
+        svg body, svg input, .start {
+            font-family:Verdana;
+            font-size:6;            
+            color:white;
+        }
+        svg input{            
+            border:1px solid white;
+            background:transparent;
+            width:45%;
         }
     </style>
 </head>
 <body>
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400px" height="400px" onload="CountDown(30);">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400px" height="400px">
     <g transform="scale(2) ">
-     <circle cx="100" cy="100" r="50" style="stroke: black; fill: green;"/>
-     <path d="M100,50 " id="arc" fill="red" stroke="none" stroke-width="2" />
-     <circle cx="100" cy="100" r="45" style="stroke: black; fill: #333;"/>
-     <g transform="translate(100,50)" id="Indicator">
-         <path d="M0,-1 L2,2 L0,5 L-2,2 z" fill="yellow" stroke="none"></path>
-     </g>
-     <text x="100" y="100" font-family="Verdana" > <tspan id="tsMinutes"></tspan><tspan>:</tspan><tspan id="tsSeconds"></tspan></text>    
-     </g>
+        <circle cx="100" cy="100" r="50" style="stroke: black; fill: green;"/>
+        <path d="M100,50 " id="arc" fill="red" stroke="none" stroke-width="2" />
+        <circle cx="100" cy="100" r="45" style="stroke: black; fill: #333;"/>
+        <g transform="translate(100,50)" id="Indicator">
+            <path d="M0,-2 L3,3 L0,7 L-3,3 z" fill="yellow" stroke="gray"></path>
+        </g>
+        <g id="runningInfo">
+            <text x="100" y="100" font-family="Verdana"  > <tspan id="tsMinutes"></tspan><tspan>:</tspan><tspan id="tsSeconds"></tspan></text> 
+        </g>
+        <g id="setUPInfo">
+           <foreignObject width="40" height="30" x="80" y="110">
+                <body>
+                      <input type="text" id="TotalMinutes" value="0" />&nbsp;<input type="text" id="TotalSeconds" value="00"/>
+               </body>
+            </foreignObject>
+            <text x="100" y="140" class="start" onclick="CountDownClock.Start(parseInt($('#TotalMinutes').val()), parseInt($('#TotalSeconds').val()))"> <tspan >Start</tspan></text>
+        </g>
+    </g>
 </svg>
+<script>
+    var CountDownClock = new CountDown();
+</script>    
 </body>
 </html>
