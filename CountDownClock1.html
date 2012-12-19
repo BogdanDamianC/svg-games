@@ -1,0 +1,28 @@
+<html>
+<head>
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+ <script type="text/javascript" src="CountDownClock1.js" > </script>
+     <style>
+        svg text{
+            font-family:Verdana;
+            font-size:20;
+            fill:pink;
+            text-anchor: middle;
+            dominant-baseline: central;
+        }
+    </style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400px" height="400px" onload="CountDown(30);">
+    <g transform="scale(2) ">
+     <circle cx="100" cy="100" r="50" style="stroke: black; fill: green;"/>
+     <path d="M100,50 " id="arc" fill="red" stroke="none" stroke-width="2" />
+     <circle cx="100" cy="100" r="45" style="stroke: black; fill: #333;"/>
+     <g transform="translate(100,50)" id="Indicator">
+         <path d="M0,-1 L2,2 L0,5 L-2,2 z" fill="yellow" stroke="none"></path>
+     </g>
+     <text x="100" y="100" font-family="Verdana" > <tspan id="tsMinutes"></tspan><tspan>:</tspan><tspan id="tsSeconds"></tspan></text>    
+     </g>
+</svg>
+</body>
+</html>
