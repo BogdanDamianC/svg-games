@@ -5,10 +5,13 @@
         var spanMinutes = $('#tsMinutes');
         var spanSeconds = $('#tsSeconds');
         var gIndicator = $('#Indicator');
+        var thisData = this;
         var Running = false;
         var radius = 50;  
         var LastPathInfo = "M100,50 ";
         this.UpdateCircle = function() {
+            if(Running === false)
+                return;
             var angle = -90;
             var currentTimeDiff = Date.now() - startTime;
             if(currentTimeDiff > totalTimeIntervalSize)
@@ -35,7 +38,13 @@
             
             
             if(angle < 270 && Running === true)
-                setTimeout(this.UpdateCircle,30);
+            {
+                setTimeout(thisData.UpdateCircle,30);
+            }
+            else
+            {
+                $(".actions").hide();
+            }
         } 
         
         function GetDisplayTimePart(timePart)
@@ -51,12 +60,23 @@
             $("#runningInfo").show();
             $("#setUPInfo").hide();            
             Running = true;            
-            this.UpdateCircle();
+            thisData.UpdateCircle();
         }
         
         this.Stop = function()
         {
             Running = false;
+            $("#btnStop").hide();
+            $("#btnContinue").show();
+            thisData.StopTime = Date.now();
+        }
+        this.Continue = function()
+        {
+            $("#btnContinue").hide();
+            $("#btnStop").show();
+            startTime = Date.now() - (thisData.StopTime - startTime);
+            Running = true;
+            thisData.UpdateCircle();
         }
         
     }

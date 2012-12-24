@@ -1,15 +1,29 @@
 <html>
 <head>
- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
  <script type="text/javascript" src="CountDownClock1.js" > </script>
      <style>
-        svg text{
-            font-family:Verdana;
-            font-size:30;
-            fill:white;
-            text-anchor: middle;
-            dominant-baseline: central;
-        }
+         svg text{
+         font-family:Verdana;
+         font-size:30;
+         fill:white;
+         text-anchor: middle;
+         dominant-baseline: central;
+         }
+         #runningInfo
+         {
+         display:none;
+         }
+         svg body, svg input, .actions {
+         font-family:Verdana;
+         font-size:6;
+         color:white;
+         }
+         svg input{
+         border:1px solid white;
+         background:transparent;
+         width:45%;
+         }
     </style>
 </head>
 <body>
@@ -27,14 +41,31 @@
         <radialGradient cx="120" cy="170" r="100" fx="120" fy="170" id="radialGradient3165" xlink:href="#linearGradient3159" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0,-0.72727275,2,0,-220,170)"/>
     </defs>
     <g transform="scale(2) ">
-     <circle cx="100" cy="100" r="50" style="stroke: black; fill: green;"/>
-     <path d="M100,50 " id="arc" fill="red" stroke="none" stroke-width="2" />
-     <circle cx="100" cy="100" r="45" style="stroke: black; fill:url(#radialGradient3165);"/>
-     <g transform="translate(100,50)" id="Indicator">
-         <path d="M0,-2 L3,3 L0,7 L-3,3 z" fill="yellow" stroke="gray"></path>
-     </g>
-     <text x="100" y="100" font-family="Verdana" > <tspan id="tsMinutes"></tspan><tspan>:</tspan><tspan id="tsSeconds"></tspan></text>    
-     </g>
+        <circle cx="100" cy="100" r="50" style="stroke: black; fill: green;"/>
+        <path d="M100,50 " id="arc" fill="red" stroke="none" stroke-width="2" />
+        <circle cx="100" cy="100" r="45" style="stroke: black; fill:url(#radialGradient3165);"/>
+        <g transform="translate(100,50)" id="Indicator">
+            <path d="M0,-2 L3,3 L0,7 L-3,3 z" fill="yellow" stroke="gray"></path>
+        </g>
+        <g id="runningInfo">
+            <text x="100" y="100" > <tspan id="tsMinutes"></tspan><tspan>:</tspan><tspan id="tsSeconds"></tspan></text>
+            <text x="100" y="120" class="actions">
+                <tspan id="btnStop" onclick="CountDownClock.Stop()">Stop</tspan>
+                <tspan id="btnContinue" style="display:none" onclick="CountDownClock.Continue()">Start</tspan>
+            </text>
+        </g>
+        <g id="setUPInfo">
+            <foreignObject width="50" height="25" x="80" y="110">
+                <body>
+                <input type="text" id="TotalMinutes" value="0" />&nbsp;<input type="text" id="TotalSeconds" value="60"/>
+                </body>
+            </foreignObject>
+            <text x="100" y="135" class="actions" onclick="CountDownClock.Start(parseInt($('#TotalMinutes').val()), parseInt($('#TotalSeconds').val()))"> <tspan >Start</tspan></text>
+        </g>
+    </g>
 </svg>
+<script>
+    var CountDownClock = new CountDown();
+</script>
 </body>
 </html>

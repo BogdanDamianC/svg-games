@@ -1,6 +1,6 @@
 <html>
 <head>
- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
  <script type="text/javascript" src="CountDownClock1.js" > </script>
      <style>
         svg text{
@@ -14,7 +14,7 @@
         {
             display:none;
         }
-        svg body, svg input, .start {
+        svg body, svg input, .actions {
             font-family:Verdana;
             font-size:6;            
             color:white;
@@ -36,15 +36,19 @@
             <path d="M0,-2 L3,3 L0,7 L-3,3 z" fill="yellow" stroke="gray"></path>
         </g>
         <g id="runningInfo">
-            <text x="100" y="100" font-family="Verdana"  > <tspan id="tsMinutes"></tspan><tspan>:</tspan><tspan id="tsSeconds"></tspan></text> 
+            <text x="100" y="100" > <tspan id="tsMinutes"></tspan><tspan>:</tspan><tspan id="tsSeconds"></tspan></text>
+            <text x="100" y="120" class="actions">
+                <tspan id="btnStop" onclick="CountDownClock.Stop()">Stop</tspan>
+                <tspan id="btnContinue" style="display:none" onclick="CountDownClock.Continue()">Start</tspan>
+            </text>
         </g>
         <g id="setUPInfo">
-           <foreignObject width="40" height="30" x="80" y="110">
+           <foreignObject width="50" height="25" x="80" y="110">
                 <body>
-                      <input type="text" id="TotalMinutes" value="0" />&nbsp;<input type="text" id="TotalSeconds" value="00"/>
+                      <input type="text" id="TotalMinutes" value="0" />&nbsp;<input type="text" id="TotalSeconds" value="60"/>
                </body>
             </foreignObject>
-            <text x="100" y="140" class="start" onclick="CountDownClock.Start(parseInt($('#TotalMinutes').val()), parseInt($('#TotalSeconds').val()))"> <tspan >Start</tspan></text>
+            <text x="100" y="135" class="actions" onclick="CountDownClock.Start(parseInt($('#TotalMinutes').val()), parseInt($('#TotalSeconds').val()))"> <tspan >Start</tspan></text>
         </g>
     </g>
 </svg>
